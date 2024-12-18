@@ -1,0 +1,5 @@
+<Frame defaultPage="views/map/map-page">
+    <Frame.actionBar>
+        <ActionBar title="Nightlife Map" icon="" />
+    </Frame.actionBar>
+</Frame>

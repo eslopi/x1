@@ -1,0 +1,29 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" 
+      xmlns:maps="@nativescript-community/ui-mapbox">
+    <GridLayout>
+        <maps:MapboxView
+            accessToken="{{ mapboxAccessToken }}"
+            zoomLevel="{{ zoomLevel }}"
+            latitude="{{ latitude }}"
+            longitude="{{ longitude }}"
+            onMapReady="{{ onMapReady }}"
+            showUserLocation="true"
+            mapStyle="mapbox://styles/mapbox/streets-v11"/>
+            
+        <StackLayout verticalAlignment="bottom" class="p-4">
+            <Label text="Nearby Venues" class="text-xl font-bold mb-2"/>
+            <ListView items="{{ venues }}" height="200">
+                <ListView.itemTemplate>
+                    <GridLayout columns="auto, *" class="p-2 bg-white rounded-lg m-1">
+                        <Image src="{{ photo }}" width="60" height="60" class="rounded"/>
+                        <StackLayout col="1" class="ml-2">
+                            <Label text="{{ name }}" class="font-bold"/>
+                            <Label text="{{ type }}" class="text-sm text-gray-600"/>
+                            <Label text="{{ rating }}" class="text-sm text-yellow-500"/>
+                        </StackLayout>
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+    </GridLayout>
+</Page>

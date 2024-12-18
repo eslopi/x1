@@ -1,0 +1,10 @@
+<GridLayout columns="*, auto" class="p-4 bg-white border-b border-gray-200">
+    <TextField col="0" 
+              text="{{ searchQuery }}" 
+              hint="Search venues..."
+              class="input" />
+    <Button col="1" 
+            text="🔍" 
+            tap="{{ onSearch }}"
+            class="btn-primary ml-2" />
+</GridLayout>

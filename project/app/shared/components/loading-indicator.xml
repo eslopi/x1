@@ -1,0 +1,4 @@
+<AbsoluteLayout class="loading-container">
+    <ActivityIndicator busy="true" class="indicator" />
+    <Label text="{{ message || 'Loading...' }}" class="loading-text" />
+</AbsoluteLayout>

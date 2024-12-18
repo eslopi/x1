@@ -1,0 +1,17 @@
+<GridLayout columns="auto, *" class="mb-4">
+    <StackLayout col="0" class="text-center mr-4">
+        <Label text="{{ averageScore }}" class="text-3xl font-bold" />
+        <Label text="{{ totalRatings + ' reviews' }}" class="text-sm text-gray-600" />
+    </StackLayout>
+    <StackLayout col="1">
+        <Repeater items="{{ distribution }}">
+            <Repeater.itemTemplate>
+                <GridLayout columns="auto, *, auto" class="mb-1">
+                    <Label col="0" text="{{ stars }}" class="mr-2" />
+                    <Progress col="1" value="{{ percentage }}" maxValue="100" class="m-1" />
+                    <Label col="2" text="{{ count }}" class="ml-2 text-gray-600" />
+                </GridLayout>
+            </Repeater.itemTemplate>
+        </Repeater>
+    </StackLayout>
+</GridLayout>

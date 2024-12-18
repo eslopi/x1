@@ -1,0 +1,11 @@
+<StackLayout class="mb-4">
+    <Label text="Operating Hours" class="text-lg font-bold mb-2" />
+    <Repeater items="{{ hours }}">
+        <Repeater.itemTemplate>
+            <GridLayout columns="*, *" class="mb-1">
+                <Label col="0" text="{{ day }}" class="text-gray-600" />
+                <Label col="1" text="{{ timeRange }}" />
+            </GridLayout>
+        </Repeater.itemTemplate>
+    </Repeater>
+</StackLayout>

@@ -1,0 +1,23 @@
+<GridLayout row="1" class="venue-list p-4">
+    <ListView items="{{ venues }}" 
+              height="{{ listHeight }}" 
+              class="bg-white rounded-t-lg"
+              itemTap="{{ onVenueTap }}">
+        <ListView.itemTemplate>
+            <GridLayout columns="auto, *" rows="auto" class="p-2">
+                <Image col="0" 
+                       src="{{ photos[0] }}" 
+                       width="60" 
+                       height="60" 
+                       class="rounded"/>
+                <StackLayout col="1" class="ml-2">
+                    <Label text="{{ name }}" class="font-bold"/>
+                    <Label text="{{ type }}" class="text-sm text-gray-600"/>
+                    <Label text="{{ '⭐ ' + rating }}" class="text-sm"/>
+                    <Label text="{{ isOpen ? 'Open' : 'Closed' }}" 
+                           class="{{ isOpen ? 'text-green-600' : 'text-red-600' }}"/>
+                </StackLayout>
+            </GridLayout>
+        </ListView.itemTemplate>
+    </ListView>
+</GridLayout>

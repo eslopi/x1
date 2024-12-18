@@ -1,0 +1,66 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" 
+      xmlns:maps="@nativescript-community/ui-mapbox"
+      navigatingTo="onNavigatingTo">
+    
+    <GridLayout rows="auto, *, auto">
+        <!-- Search Bar -->
+        <GridLayout row="0" columns="*, auto" class="p-4 bg-white border-b border-gray-200">
+            <TextField col="0" 
+                      text="{{ searchQuery }}" 
+                      hint="Search venues..."
+                      class="input" />
+            <Button col="1" 
+                    text="🔍" 
+                    tap="{{ onSearch }}"
+                    class="btn-primary ml-2" />
+        </GridLayout>
+
+        <!-- Map View -->
+        <GridLayout row="1">
+            <maps:MapboxView
+                accessToken="{{ mapboxAccessToken }}"
+                zoomLevel="{{ mapConfig.defaultCenter.zoom }}"
+                latitude="{{ mapConfig.defaultCenter.lat }}"
+                longitude="{{ mapConfig.defaultCenter.lng }}"
+                onMapReady="{{ onMapReady }}"
+                showUserLocation="true"
+                mapStyle="{{ mapConfig.style }}"/>
+                
+            <!-- Chatbot FAB -->
+            <Button class="fab-button" 
+                    text="💬" 
+                    tap="{{ onChatbotTap }}"
+                    horizontalAlignment="right"
+                    verticalAlignment="bottom"
+                    margin="16"/>
+        </GridLayout>
+            
+        <!-- Venue List -->
+        <GridLayout row="2" class="venue-list p-4">
+            <ListView items="{{ venues }}" 
+                      height="200" 
+                      class="bg-white rounded-t-lg"
+                      itemTap="{{ onVenueTap }}">
+                <ListView.itemTemplate>
+                    <GridLayout columns="auto, *, auto" rows="auto" class="p-2">
+                        <Image col="0" 
+                               src="{{ photos[0] }}" 
+                               width="60" 
+                               height="60" 
+                               class="rounded"/>
+                        <StackLayout col="1" class="ml-2">
+                            <Label text="{{ name }}" class="font-bold"/>
+                            <Label text="{{ type }}" class="text-sm text-gray-600"/>
+                            <Label text="{{ '⭐ ' + rating }}" class="text-sm"/>
+                            <Label text="{{ isOpen ? 'Open' : 'Closed' }}" 
+                                   class="{{ isOpen ? 'text-green-600' : 'text-red-600' }}"/>
+                        </StackLayout>
+                        <Label col="2" 
+                               text="{{ currentOccupancy + '/' + capacity }}"
+                               class="text-sm text-gray-600"/>
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </GridLayout>
+    </GridLayout>
+</Page>

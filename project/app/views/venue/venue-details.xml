@@ -1,0 +1,76 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="{{ venue.name }}" class="action-bar">
+        <NavigationButton visibility="visible" />
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Venue Images -->
+            <ScrollView orientation="horizontal" class="mb-4">
+                <StackLayout orientation="horizontal">
+                    <Repeater items="{{ venue.photos }}">
+                        <Repeater.itemTemplate>
+                            <Image src="{{ $value }}" width="280" height="200" class="rounded-lg mr-2" stretch="aspectFill" />
+                        </Repeater.itemTemplate>
+                    </Repeater>
+                </StackLayout>
+            </ScrollView>
+
+            <!-- Venue Info -->
+            <Label text="{{ venue.name }}" class="text-2xl font-bold mb-2" />
+            <Label text="{{ venue.type }}" class="text-lg text-gray-600 mb-2" />
+            <Label text="{{ venue.description }}" textWrap="true" class="mb-4" />
+
+            <!-- Operating Hours -->
+            <Label text="Operating Hours" class="text-lg font-bold mb-2" />
+            <Repeater items="{{ formattedHours }}">
+                <Repeater.itemTemplate>
+                    <GridLayout columns="*, *" class="mb-1">
+                        <Label col="0" text="{{ day }}" class="text-gray-600" />
+                        <Label col="1" text="{{ hours }}" />
+                    </GridLayout>
+                </Repeater.itemTemplate>
+            </Repeater>
+
+            <!-- Rating Summary -->
+            <Label text="Ratings & Reviews" class="text-lg font-bold mt-4 mb-2" />
+            <GridLayout columns="auto, *" class="mb-4">
+                <StackLayout col="0" class="text-center mr-4">
+                    <Label text="{{ ratingSummary.averageScore }}" class="text-3xl font-bold" />
+                    <Label text="{{ ratingSummary.totalRatings + ' reviews' }}" class="text-sm text-gray-600" />
+                </StackLayout>
+                <StackLayout col="1">
+                    <Repeater items="{{ ratingDistribution }}">
+                        <Repeater.itemTemplate>
+                            <GridLayout columns="auto, *, auto" class="mb-1">
+                                <Label col="0" text="{{ stars }}" class="mr-2" />
+                                <Progress col="1" value="{{ percentage }}" maxValue="100" class="m-1" />
+                                <Label col="2" text="{{ count }}" class="ml-2 text-gray-600" />
+                            </GridLayout>
+                        </Repeater.itemTemplate>
+                    </Repeater>
+                </StackLayout>
+            </GridLayout>
+
+            <!-- Add Rating -->
+            <Label text="Add Your Rating" class="text-lg font-bold mt-4 mb-2" />
+            <GridLayout rows="auto, auto" columns="*, auto" class="mb-4">
+                <Slider row="0" col="0" 
+                        value="{{ userRating }}" 
+                        minValue="1" 
+                        maxValue="5" 
+                        class="mb-2" />
+                <Label row="0" col="1" 
+                       text="{{ userRating }}" 
+                       class="ml-2" />
+                <TextView row="1" col="0" col-span="2"
+                          text="{{ userComment }}"
+                          hint="Write your review (optional)"
+                          class="input p-2 mb-2" />
+            </GridLayout>
+            <Button text="Submit Rating" 
+                    tap="{{ submitRating }}"
+                    class="btn-primary" />
+        </StackLayout>
+    </ScrollView>
+</Page>

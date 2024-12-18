@@ -1,0 +1,48 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="{{ venueName }}" class="action-bar">
+        <NavigationButton visibility="visible" />
+        <Label text="{{ participantCount + ' online' }}" class="text-sm ml-2" />
+    </ActionBar>
+
+    <GridLayout rows="*, auto">
+        <!-- Messages List -->
+        <ListView row="0" items="{{ messages }}" class="chat-list">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto, *" class="p-2">
+                    <Label col="0" 
+                           text="{{ userName[0] }}" 
+                           class="w-8 h-8 rounded-full bg-blue-500 text-white text-center leading-8" />
+                    <StackLayout col="1" class="ml-2">
+                        <GridLayout columns="auto, *">
+                            <Label col="0" text="{{ userName }}" class="font-bold" />
+                            <Label col="1" text="{{ timestamp | timeAgo }}" class="text-xs text-gray-500 text-right" />
+                        </GridLayout>
+                        <Label text="{{ content }}" textWrap="true" class="message-bubble" />
+                        <Image src="{{ imageUrl }}" class="mt-1 rounded" visibility="{{ imageUrl ? 'visible' : 'collapsed' }}" />
+                    </StackLayout>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <!-- Typing Indicator -->
+        <Label row="0" verticalAlignment="bottom" 
+               text="{{ typingText }}"
+               class="text-sm text-gray-500 p-2"
+               visibility="{{ isTyping ? 'visible' : 'collapsed' }}" />
+
+        <!-- Message Input -->
+        <GridLayout row="1" columns="*, auto" class="input-container p-2">
+            <TextField col="0" 
+                      text="{{ messageText }}" 
+                      hint="Type a message..."
+                      returnKeyType="send"
+                      class="input p-2"
+                      textChange="{{ onTextChange }}" />
+            <Button col="1" 
+                    text="Send" 
+                    tap="{{ onSendMessage }}"
+                    class="btn-primary ml-2" 
+                    isEnabled="{{ messageText.length > 0 }}" />
+        </GridLayout>
+    </GridLayout>
+</Page>

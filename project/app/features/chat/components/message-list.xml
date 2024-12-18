@@ -1,0 +1,17 @@
+<ListView items="{{ messages }}" class="chat-list">
+    <ListView.itemTemplate>
+        <GridLayout columns="auto, *" class="p-2">
+            <Label col="0" 
+                   text="{{ userName[0] }}" 
+                   class="w-8 h-8 rounded-full bg-blue-500 text-white text-center leading-8" />
+            <StackLayout col="1" class="ml-2">
+                <GridLayout columns="auto, *">
+                    <Label col="0" text="{{ userName }}" class="font-bold" />
+                    <Label col="1" text="{{ timestamp | timeAgo }}" class="text-xs text-gray-500 text-right" />
+                </GridLayout>
+                <Label text="{{ content }}" textWrap="true" class="message-bubble" />
+                <Image src="{{ imageUrl }}" class="mt-1 rounded" visibility="{{ imageUrl ? 'visible' : 'collapsed' }}" />
+            </StackLayout>
+        </GridLayout>
+    </ListView.itemTemplate>
+</ListView>
